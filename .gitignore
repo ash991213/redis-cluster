@@ -1,0 +1,8 @@
+# redis aof #
+**/appendonlydir/
+
+# redis data snapshot #
+**/dump.rdb
+
+# redis info #
+**/nodes.conf
