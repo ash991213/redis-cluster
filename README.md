@@ -54,13 +54,21 @@
 4. 새로운 master node 추가
 
    ```bash
+   ## 새로운 master node 실행
+   $ redis-server redis_master_6303.conf
+
    $ redis-cli --cluster add-node <new master ip:port> <master ip:port>
+   $ redis-cli --cluster add-node localhost:6303 localhost:6300
    ```
 
 5. 새로운 slave node 추가
 
    ```bash
+   ## 새로운 slave node 실행
+   $ redis-server redis_replica_6403.conf
+
    $ redis-cli --cluster add-node <replica ip:port> <master ip:port> --cluster-slave
+   $ redis-cli --cluster add-node localhost:6403 localhost:6303 --cluster-slave
    ```
 
 6. redis-cluster 접속
@@ -97,20 +105,59 @@
    $ redis-cli --cluster rebalance localhost:6300
    ```
 
-9. node 제거
+9. redis-cluster 접속
 
    ```bash
-   $ redis-cli -h localhost -p 6300 cluster forget <연결되어 있는 node id>
+   $ redis-cli -h localhost -p 6300 -c
    ```
 
-10. shutdown 명령어를 통해 master node를 다운시키고서의 동작 확인 ( 고가용성 테스트 )
+10. node 정보 확인
 
     ```bash
-    $ shutdown
+    $ cluster nodes
     ```
 
 ---
 
 ## 클러스터 테스트
 
+1. shutdown 명령어를 통해 master node를 다운시키고서의 동작 확인 ( 고가용성 테스트 )
+
+   ```bash
+   $ shutdown
+   ```
+
 ---
+
+## 에러
+
+Failed to configure LOCALE for invalid locale name.
+
+Redis가 인식할 수 없는 로케일을 사용하려고 할 때 발생합니다
+
+```bash
+LANG="en_KR.UTF-8"
+LC_COLLATE="C"
+LC_CTYPE="C"
+LC_MESSAGES="C"
+LC_MONETARY="C"
+LC_NUMERIC="C"
+LC_TIME="C"
+LC_ALL=
+```
+
+```bash
+$ export LC_ALL=en_US.UTF-8
+$ export LANG=en_US.UTF-8
+```
+
+```bash
+LANG="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+```
