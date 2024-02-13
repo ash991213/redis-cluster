@@ -51,6 +51,9 @@
    $ redis-cli --cluster create 127.0.0.1:6300 127.0.0.1:6301 127.0.0.1:6302 127.0.0.1:6400 127.0.0.1:6401 127.0.0.1:6402 --cluster-replicas 1
    ```
 
+   <img width="365" alt="레디스 클러스터 생성" src="https://github.com/ash991213/redis-cluster/assets/99451647/a2af4fe1-3768-4cf2-b6c7-5e8940c14440">
+
+
 4. 새로운 master node 추가
 
    ```bash
@@ -83,6 +86,8 @@
    $ cluster nodes
    ```
 
+   <img width="825" alt="노드 정보 확인" src="https://github.com/ash991213/redis-cluster/assets/99451647/6731a417-edfc-4a3a-9558-a39bda1db033">
+
 8. 신규 node가 추가 되었지만 적용이 안 된 상태이니 전체 서버로 resharding 작업 수행
 
    ```bash
@@ -104,6 +109,8 @@
    # 슬롯 수 재분배
    $ redis-cli --cluster rebalance localhost:6300
    ```
+
+   <img width="826" alt="슬롯 수 재설정" src="https://github.com/ash991213/redis-cluster/assets/99451647/f5a271a3-c191-4f05-a992-5a959b6a94d3">
 
 9. redis-cluster 접속
 
